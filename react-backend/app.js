@@ -158,6 +158,21 @@ MongoClient.connect("mongodb://localhost:27017", function (err, client) {
     });
   });
 
+  app.delete('/portfolio/:id', function(req, res){
+    const objectID = ObjectID(req.params.id);
+    const filterObject = {_id: objectID};
+    const portfolioCollection = db.collection('portfolio');
+    portfolioCollection.deleteOne(filterObject, function(err, result){
+      if(err){
+        res.status(500);
+        res.send();
+      }
+
+      res.status(204);
+      res.send();
+    });
+  });
+
 
   // PROFIT COLLECTION
 
